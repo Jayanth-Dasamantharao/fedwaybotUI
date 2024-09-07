@@ -12,8 +12,8 @@ from langchain_community.utilities import SQLDatabase
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 
 # AWS Bedrock setup (replace with your keys and region)
-os.environ['AWS_ACCESS_KEY_ID'] = AWS_ACCESS_KEY_ID
-os.environ['AWS_SECRET_ACCESS_KEY'] = AWS_SECRET_ACCESS_KEY
+os.environ['AWS_ACCESS_KEY_ID'] = st.secrets["AWS_ACCESS_KEY_ID"]
+os.environ['AWS_SECRET_ACCESS_KEY'] = st.secrets["AWS_SECRET_ACCESS_KEY"]
 os.environ['AWS_DEFAULT_REGION'] = 'us-east-1'
 
 bedrock_runtime = boto3.client(
