@@ -1,0 +1,9 @@
+streamlit
+time
+os
+boto3
+langchain_core
+langchain_aws
+langchain
+langchain_community
+sqlalchemy
