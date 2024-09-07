@@ -62,7 +62,7 @@ metadata.create_all(engine)
 
 # Function to populate tables with correct data
 def populate_tables():
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         conn.execute(customers.insert(), [
             {'shop_name': 'Buy Rite Liquors'},
             {'shop_name': 'Buffalo Wild Wings'},
