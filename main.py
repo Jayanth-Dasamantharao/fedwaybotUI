@@ -215,7 +215,7 @@ def response_generator(prompt):
 #Main streamlit function
 if __name__ == '__main__':
     # Display Fedway logo using Streamlit's st.image with resizing
-    st.image("fedway-logo.png", use_column_width=False, width=100)  # Adjust width as needed
+    st.image("fedway-logo.png", use_column_width=False, width=300)  # Adjust width as needed
 
     # Embed CSS for additional styling
     st.markdown(
