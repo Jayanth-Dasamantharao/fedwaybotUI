@@ -217,7 +217,7 @@ def response_generator(prompt):
 # Main Streamlit app function
 if __name__ == '__main__':
     # Add Fedway logo at the top of the page with reduced size
-    st.image("fedway-logo.png", use_column_width=False)
+    st.image("fedway-logo.png")
 
     # Optional: Embed CSS for additional styling
     st.markdown(
@@ -227,7 +227,7 @@ if __name__ == '__main__':
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 50px;
+            width: 100px;
         }
         .stChatMessage {
             font-size: 14px;
