@@ -213,10 +213,43 @@ def response_generator(prompt):
         time.sleep(0.07)
 
 # Main Streamlit app function
+# Main Streamlit app function
 if __name__ == '__main__':
-    # Add Fedway logo at the top of the page
-    st.image("fedway-logo.png", width=200) 
-    st.title("Fedway Assistant")
+    # Add Fedway logo at the top of the page with reduced size
+    st.image("path/to/fedway_logo.png", width=200)  # Adjust the width as needed
+
+    # Optional: Embed CSS for additional styling
+    st.markdown(
+        """
+        <style>
+        /* Center the logo */
+        .stImage {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Custom styles for the chat interface */
+        .stChatMessage {
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+        /* Reduce the size of the title */
+        .custom-title {
+            font-size: 24px; /* Adjust the size as needed */
+            text-align: center; /* Center align the title */
+            font-weight: bold; /* Optional: Make it bold */
+            color: #333333; /* Optional: Change the color */
+            margin-top: 10px; /* Optional: Add some margin */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Display the title with reduced size using custom CSS class
+    st.markdown('<h1 class="custom-title">Fedway Bot</h1>', unsafe_allow_html=True)
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -237,3 +270,4 @@ if __name__ == '__main__':
             response = st.write_stream(response_generator(prompt))
 
         st.session_state.messages.append({"role": "assistant", "content": response})
+
