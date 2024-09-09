@@ -227,7 +227,7 @@ if __name__ == '__main__':
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 50;
+            width: 10;
         }
         .stChatMessage {
             font-size: 14px;
