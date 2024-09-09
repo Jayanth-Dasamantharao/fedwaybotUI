@@ -101,16 +101,6 @@ CREATE TABLE address (
 );
 """
 
-# schema2 = """
-# CREATE TABLE address (
-#     address_id integer PRIMARY KEY AUTOINCREMENT,
-#     location String NOT NULL,
-#     city String NOT NULL,
-#     zip_code String NOT NULL
-# );
-# """
-
-
 # Function to generate SQL query with enhanced instructions and validation
 def generate_sql_prompt(question):
     template = """ 
@@ -121,7 +111,7 @@ def generate_sql_prompt(question):
     1. Only generate the SQL query without explanations or additional text.
     2. Ensure the query is syntactically correct and contains the necessary clauses (`SELECT`, `FROM`, `WHERE`, etc.).
     3. Select columns relevant to answering the question, avoid selecting all columns (`*`) unless explicitly needed.
-    4. Always using wildcards "LIKE" to match the shopnames.
+    4. Always use wildcards "LIKE" to match the shop names.
     5. If the question references specific values, ensure those values are properly quoted and matched accurately in the SQL using the LIKE wildcards.
     6. Avoid using ambiguous natural language constructs; focus on standard SQL syntax.
     7. Do not assume column names; use only those explicitly defined in the provided table schemas.
@@ -134,18 +124,6 @@ def generate_sql_prompt(question):
 
     
     """
-    # template = """You are an SQL expert. Generate only the SQL query required to answer the user's question based on the given table schemas. 
-    # Ensure the query selects relevant columns, includes necessary conditions, and does not contain any natural language or explanations.
-
-    # Customer Table schema:
-    # {schema1}
-
-    # Address Table schema:
-    # {schema2}
-
-    # Question: {question}
-    # SQL Query:"""
-
     prompt = ChatPromptTemplate.from_template(template)
     conversation = LLMChain(llm=llm, prompt=prompt, verbose=True)
     response = conversation.invoke({"question": question, "schema1": schema1, "schema2": schema2})
@@ -187,10 +165,8 @@ def fallback_sql_query(question):
 def generate_english_response(question, query, result):
     if result == "":
         result = db.run("SELECT * FROM ADDRESS")
-        # return "Sorry, No information available for your question!"
-    print(question, query, result)
     final_prompt = PromptTemplate.from_template(
-        """Based on the table schema below, question, SQL query, and SQL response, write an English response of the answer. IF YOU ARE NOT ABLE TO FIND ANY RESPONSE MATCHING WITH THE USER QUESTION, SIMPLE RETURN "SORRY, NO INFORMATION AVAILABLE!":
+        """Based on the table schema below, question, SQL query, and SQL response, write an English response of the answer. IF YOU ARE NOT ABLE TO FIND ANY RESPONSE MATCHING WITH THE USER QUESTION, SIMPLY RETURN "SORRY, NO INFORMATION AVAILABLE!":
         Question: {question}
         SQL Query: {query}
         SQL Result: {result}
@@ -238,24 +214,5 @@ def response_generator(prompt):
 
 # Main Streamlit app function
 if __name__ == '__main__':
-    st.title("Fedway Bot")
-
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    # Display previous chat messages
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    # Capture user input from the chat input box
-    if prompt := st.chat_input("What is up?"):
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        st.session_state.messages.append({"role": "user", "content": prompt})
-
-        # Generate the assistant's response
-        with st.chat_message("assistant"):
-            response = st.write_stream(response_generator(prompt))
-
-        st.session_state.messages.append({"role": "assistant", "content": response})
+    # Add Fedway logo at the top of the page
+    st.image("fedway-logo.png", use_column_width=True)  
