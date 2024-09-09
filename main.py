@@ -219,7 +219,7 @@ if __name__ == '__main__':
     # Add Fedway logo at the top of the page with reduced size
     st.markdown('<img src="fedway-logo.png" class="logo-img">', unsafe_allow_html=True)
 
-    # Optional: Embed CSS for additional styling
+    # Embed CSS for additional styling
     st.markdown(
         """
         <style>
@@ -227,27 +227,26 @@ if __name__ == '__main__':
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-                width: 50px;  /* Set your desired width here */
+                max-width: 100px;  /* Adjust size as needed */
                 height: auto;  /* Maintain aspect ratio */
-        }
-        .stChatMessage {
-            font-size: 14px;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 5px 0;
-        }
-        .custom-title {
-            font-size: 24px;
-            text-align: center;
-            font-weight: bold;
-            color: #333333;
-            margin-top: 10px;
-        }
+            }
+            .stChatMessage {
+                font-size: 14px;
+                padding: 10px;
+                border-radius: 8px;
+                margin: 5px 0;
+            }
+            .custom-title {
+                font-size: 24px;
+                text-align: center;
+                font-weight: bold;
+                color: #333333;
+                margin-top: 10px;
+            }
         </style>
         """,
         unsafe_allow_html=True
     )
-
 
     # Display the title with reduced size using custom CSS class
     st.markdown('<h1 class="custom-title">Fedway Bot</h1>', unsafe_allow_html=True)
@@ -271,5 +270,4 @@ if __name__ == '__main__':
             response = st.write_stream(response_generator(prompt))
 
         st.session_state.messages.append({"role": "assistant", "content": response})
-
 
