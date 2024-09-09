@@ -215,7 +215,7 @@ def response_generator(prompt):
 # Main Streamlit app function
 if __name__ == '__main__':
     # Add Fedway logo at the top of the page
-    st.image("fedway-logo.png", use_column_width=True) 
+    st.image("fedway-logo.png", width=200) 
     st.title("Fedway Bot")
 
     if "messages" not in st.session_state:
