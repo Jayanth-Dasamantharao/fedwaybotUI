@@ -243,7 +243,7 @@ if __name__ == '__main__':
     )
 
     # Display the title with reduced size using custom CSS class
-    st.markdown('<h1 class="custom-title">Fedway Bot</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="custom-title">Fedway Assistant</h1>', unsafe_allow_html=True)
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
