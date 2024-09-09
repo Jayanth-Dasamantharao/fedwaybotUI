@@ -221,31 +221,31 @@ if __name__ == '__main__':
 
     # Optional: Embed CSS for additional styling
     st.markdown(
+        """
         <style>
-        /* Center the logo */
         .stImage {
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-        /* Custom styles for the chat interface */
         .stChatMessage {
-            font-size: 14px; /* Adjust font size */
+            font-size: 14px;
             padding: 10px;
             border-radius: 8px;
             margin: 5px 0;
         }
-        /* Reduce the size of the title */
         .custom-title {
-            font-size: 24px; /* Adjust the size as needed */
-            text-align: center; /* Center align the title */
-            font-weight: bold; /* Optional: Make it bold */
-            color: #333333; /* Optional: Change the color */
-            margin-top: 10px; /* Optional: Add some margin */
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            color: #333333;
+            margin-top: 10px;
         }
-        </style>,
+        </style>
+        """,
         unsafe_allow_html=True
     )
+
 
     # Display the title with reduced size using custom CSS class
     st.markdown('<h1 class="custom-title">Fedway Bot</h1>', unsafe_allow_html=True)
