@@ -217,7 +217,7 @@ def response_generator(prompt):
 # Main Streamlit app function
 if __name__ == '__main__':
     # Add Fedway logo at the top of the page with reduced size
-    st.image("fedway-logo.png" class="logo-img")
+    st.markdown('<img src="fedway-logo.png" class="logo-img">', unsafe_allow_html=True)
 
     # Optional: Embed CSS for additional styling
     st.markdown(
