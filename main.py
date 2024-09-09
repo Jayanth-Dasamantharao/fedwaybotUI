@@ -238,7 +238,7 @@ def response_generator(prompt):
 
 # Main Streamlit app function
 if __name__ == '__main__':
-    st.title("Fedway Bot :)")
+    st.title("Fedway Bot")
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
