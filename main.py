@@ -216,7 +216,7 @@ def response_generator(prompt):
 if __name__ == '__main__':
     # Add Fedway logo at the top of the page
     st.image("fedway-logo.png", width=200) 
-    st.title("Fedway Bot")
+    st.title("Fedway Assistant")
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
