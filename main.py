@@ -214,6 +214,7 @@ def response_generator(prompt):
 
 # Main Streamlit app function
 # Main Streamlit app function
+# Main Streamlit app function
 if __name__ == '__main__':
     # Add Fedway logo at the top of the page with reduced size
     #st.image("path/to/fedway_logo.png", width=200)  # Adjust the width as needed
@@ -229,7 +230,7 @@ if __name__ == '__main__':
         }
         /* Custom styles for the chat interface */
         .stChatMessage {
-            font-size: 14px;
+            font-size: 14px; /* Adjust font size */
             padding: 10px;
             border-radius: 8px;
             margin: 5px 0;
@@ -242,7 +243,7 @@ if __name__ == '__main__':
             color: #333333; /* Optional: Change the color */
             margin-top: 10px; /* Optional: Add some margin */
         }
-        </style>
+        </style>,
         unsafe_allow_html=True
     )
 
@@ -268,4 +269,5 @@ if __name__ == '__main__':
             response = st.write_stream(response_generator(prompt))
 
         st.session_state.messages.append({"role": "assistant", "content": response})
+
 
