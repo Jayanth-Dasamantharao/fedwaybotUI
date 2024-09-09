@@ -217,17 +217,13 @@ import streamlit as st
 
 # Main Streamlit app function
 if __name__ == '__main__':
-    # Embed CSS for additional styling including centering the logo
+    # Display Fedway logo using Streamlit's st.image with resizing
+    st.image("fedway-logo.png", use_column_width=False, width=300)  # Adjust width as needed
+
+    # Embed CSS for additional styling
     st.markdown(
         """
         <style>
-            .centered-logo {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 300px;  /* Adjust the width as needed */
-                height: auto;
-            }
             .stChatMessage {
                 font-size: 14px;
                 padding: 10px;
@@ -245,9 +241,6 @@ if __name__ == '__main__':
         """,
         unsafe_allow_html=True
     )
-
-    # Display the Fedway logo centered with reduced size
-    st.markdown('<img src="fedway-logo.png" class="centered-logo">', unsafe_allow_html=True)
 
     # Display the title with reduced size using custom CSS class
     st.markdown('<h1 class="custom-title">Fedway Bot</h1>', unsafe_allow_html=True)
