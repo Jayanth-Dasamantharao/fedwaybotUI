@@ -215,4 +215,25 @@ def response_generator(prompt):
 # Main Streamlit app function
 if __name__ == '__main__':
     # Add Fedway logo at the top of the page
-    st.image("fedway-logo.png", use_column_width=True)  
+    st.image("fedway-logo.png", use_column_width=True) 
+    st.title("Fedway Bot")
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # Display previous chat messages
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # Capture user input from the chat input box
+    if prompt := st.chat_input("What is up?"):
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        st.session_state.messages.append({"role": "user", "content": prompt})
+
+        # Generate the assistant's response
+        with st.chat_message("assistant"):
+            response = st.write_stream(response_generator(prompt))
+
+        st.session_state.messages.append({"role": "assistant", "content": response})
