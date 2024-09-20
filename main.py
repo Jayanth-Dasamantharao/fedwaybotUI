@@ -11,7 +11,7 @@ from langchain_community.utilities import SQLDatabase
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 import os
 import dotenv
-from azure.identity import AzureDeveloperCliCredential, get_bearer_token_provider
+#from azure.identity import AzureDeveloperCliCredential, get_bearer_token_provider
 from azure.identity import DefaultAzureCredential
 from azure.search.documents import SearchClient
 from azure.search.documents.indexes import SearchIndexClient
