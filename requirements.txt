@@ -5,4 +5,4 @@ langchain_aws
 langchain
 langchain_community
 sqlalchemy
-azure
+azure-core
