@@ -5,6 +5,7 @@ import requests
 from PIL import Image
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
+from azure.search.documents.models import VectorizedQuery
 import mimetypes
 
 # Load environment variables
@@ -13,11 +14,11 @@ dotenv.load_dotenv()
 # Azure Search configuration
 AZURE_SEARCH_ENDPOINT = "https://visionrag.search.windows.net"
 AZURE_SEARCH_IMAGES_INDEX = "images-index"
-AZURE_SEARCH_KEY = os.getenv("AZURE_SEARCH_KEY", "your-search-key-here")
+AZURE_SEARCH_KEY = st.secrets["AZURE_SEARCH_KEY"]
 
 # Azure Computer Vision configuration
 AZURE_COMPUTER_VISION_URL = "https://visionrag2.cognitiveservices.azure.com/computervision/retrieval"
-AZURE_COMPUTER_VISION_KEY = os.getenv("AZURE_COMPUTER_VISION_KEY", "your-cv-key-here")
+AZURE_COMPUTER_VISION_KEY = st.secrets["AZURE_COMPUTER_VISION_KEY"]
 
 # Initialize Azure Search client
 search_client = SearchClient(
