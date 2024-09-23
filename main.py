@@ -14,11 +14,11 @@ dotenv.load_dotenv()
 # Azure Search configuration
 AZURE_SEARCH_ENDPOINT = "https://visionrag.search.windows.net"
 AZURE_SEARCH_IMAGES_INDEX = "images-index"
-AZURE_SEARCH_KEY = st.secrets["AZURE_SEARCH_KEY"]
+AZURE_SEARCH_KEY = os.getenv("AZURE_SEARCH_KEY", "aMXKjrW8jOP8KGkENvXzed3p09VIZmP5qZWY3G6zdOAzSeDEHJ5z")
 
 # Azure Computer Vision configuration
 AZURE_COMPUTER_VISION_URL = "https://visionrag2.cognitiveservices.azure.com/computervision/retrieval"
-AZURE_COMPUTER_VISION_KEY = st.secrets["AZURE_COMPUTER_VISION_KEY"]
+AZURE_COMPUTER_VISION_KEY = os.getenv("AZURE_COMPUTER_VISION_KEY", "21f28922a02b4a0d9edfccfe13104553")
 
 # Initialize Azure Search client
 search_client = SearchClient(
@@ -26,6 +26,8 @@ search_client = SearchClient(
     index_name=AZURE_SEARCH_IMAGES_INDEX,
     credential=AzureKeyCredential(AZURE_SEARCH_KEY)
 )
+
+GREETINGS = "Hello! I am the Fedway Assistant. I can help you find product images. Please ask me about any product and I will display the images for you."
 
 # Function to get image embedding from Azure Computer Vision
 def get_model_params():
@@ -88,20 +90,21 @@ def search_images(query):
     return None
 
 # Streamlit response generator
-def response_generator(prompt):
-    greetings = ["hi", "hello", "hey", "greetings", "what's up"]
-    if prompt.lower().strip() in greetings:
-        yield "Hello! I am the Fedway Assistant. I can help you find product images. Please ask me about any product and I will display the images for you."
-    else:
-        image_response = search_images(prompt)
-        if image_response:
-            yield image_response
-        else:
-            yield "No matching images found."
 
+def response_generator(prompt):
+    image_response = search_images(prompt)
+    if image_response:
+        yield image_response
+    else:
+        yield None
+
+def greetings_generator(prompt):
+    yield GREETINGS
+        
 # Main Streamlit function
 if __name__ == '__main__':
     st.image("fedway-logo.png", use_column_width=False, width=300)
+    st.write_stream(greetings_generator("Greetings"))
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -116,7 +119,6 @@ if __name__ == '__main__':
         with st.chat_message("user"):
             st.markdown(prompt)
         st.session_state.messages.append({"role": "user", "content": prompt})
-
         # Generate assistant's response
         image_response = None
         for response in response_generator(prompt):
