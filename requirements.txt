@@ -7,3 +7,4 @@ langchain_community
 sqlalchemy
 azure-core
 azure-search
+azure-search-documents
