@@ -89,11 +89,15 @@ def search_images(query):
 
 # Streamlit response generator
 def response_generator(prompt):
-    image_response = search_images(prompt)
-    if image_response:
-        yield image_response
+    greetings = ["hi", "hello", "hey", "greetings", "what's up"]
+    if prompt.lower().strip() in greetings:
+        yield "Hello! I am the Fedway Assistant. I can help you find product images. Please ask me about any product and I will display the images for you."
     else:
-        yield None
+        image_response = search_images(prompt)
+        if image_response:
+            yield image_response
+        else:
+            yield "No matching images found."
 
 # Main Streamlit function
 if __name__ == '__main__':
