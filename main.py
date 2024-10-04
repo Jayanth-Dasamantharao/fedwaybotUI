@@ -20,11 +20,11 @@ from langchain_aws import BedrockLLM
 # Azure Search configuration
 AZURE_SEARCH_ENDPOINT = "https://visionrag.search.windows.net"
 AZURE_SEARCH_IMAGES_INDEX = "images-index-poc-2"
-AZURE_SEARCH_KEY = os.getenviron["AZURE_SEARCH_KEY"]
+AZURE_SEARCH_KEY = ["AZURE_SEARCH_KEY", "aMXKjrW8jOP8KGkENvXzed3p09VIZmP5qZWY3G6zdOAzSeDEHJ5z"]
 
 # Azure Computer Vision configuration
 AZURE_COMPUTER_VISION_URL = "https://visionrag2.cognitiveservices.azure.com/computervision/retrieval"
-AZURE_COMPUTER_VISION_KEY = os.getenviron["AZURE_COMPUTER_VISION_KEY"]
+AZURE_COMPUTER_VISION_KEY = ["AZURE_COMPUTER_VISION_KEY", "21f28922a02b4a0d9edfccfe13104553"]
 
 # Initialize Azure Search client
 search_client = SearchClient(
