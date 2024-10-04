@@ -173,7 +173,7 @@ def response_generator(prompt):
         else:
             yield 'No relevant images found. Enter a valid query'
     else:
-        yield allow_image_retrieval
+        yield 'No relevant images found. Enter a valid query'
 
 def greetings_generator(prompt):
     yield GREETINGS
