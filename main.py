@@ -148,12 +148,19 @@ def search_images(query):
             fields="embedding"
         )]
     )
+    
     all_results = [doc["filename"] for doc in results]
-    if all_results:
-        img_path = f"images/{all_results[0]}"
-        img = Image.open(img_path)
-        return img
-    return None
+    images = []
+    
+    for result in all_results:
+        img_path = f"images/{result}"
+        try:
+            img = Image.open(img_path)
+            images.append(img)
+        except Exception as e:
+            print(f"Error opening image {img_path}: {e}")
+    
+    return images if images else None
 
 # Streamlit response generator
 
@@ -173,8 +180,7 @@ def greetings_generator(prompt):
         
 # Main Streamlit function
 if __name__ == '__main__':
-    st.image("fedway-logo.png", use_column_width=False, width=300)
-    st.title("Fedway Sales - Helpdesk POC")
+    #st.image("fedway-logo.png", use_column_width=False, width=300)
     index_images()
     st.write_stream(greetings_generator("Greetings"))
 
@@ -182,32 +188,33 @@ if __name__ == '__main__':
         st.session_state.messages = []
     if "images" not in st.session_state:
         st.session_state.images = []
-
-    # Display previous chat messages
-    for i, message in enumerate(st.session_state.messages):
-        with st.chat_message(message["role"]):
-            if message["content"].startswith("Image reference: "):
-                image_index = int(message["content"].split()[-1])  
-                st.image(st.session_state.images[image_index], caption=f"Image")
-            else:
-                st.markdown(message["content"])
-
+        
+    if st.session_state.messages:
+        
+        
     # Capture user input
     if prompt := st.chat_input("What is up?"):
         with st.chat_message("user"):
             st.markdown(prompt)
         st.session_state.messages.append({"role": "user", "content": prompt})
+        
         # Generate assistant's response
-        image_response = None
         for response in response_generator(prompt):
-            if isinstance(response, Image.Image): 
+            if isinstance(response, list) and all(isinstance(img, Image.Image) for img in response): 
                 with st.chat_message("assistant"):
-                    st.session_state.images.append(response)
-                    image_index = len(st.session_state.images) - 1  
-                    st.session_state.messages.append({"role": "assistant", "content": f"Image reference: {image_index}"})
-                    st.image(response, caption=f"Image", width=200)
+                    image_indices = range(len(st.session_state.images) - len(response), len(st.session_state.images))
+                    print(image_indices)
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": f"Image reference: {image_indices}"
+                    })
+                    st.session_state.images.extend(response)
+                    
+                    # Create 3 columns for horizontal display
+                    cols = st.columns(len(response))
+                    for i, col in enumerate(cols):
+                        col.image(response[i], caption=f"Image {i+1}", use_column_width=True)
             else:  
                 with st.chat_message("assistant"):
                     st.markdown(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
-
