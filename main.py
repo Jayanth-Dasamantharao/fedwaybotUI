@@ -65,7 +65,7 @@ def llm_response(query):
     llm = load_llm()
     prompt =  """ 
 
-        You are a very intelligent AI assitant who is expert in checking the context of the user query. The user query should match any alcohol/wine related questions or keywords.
+        You are a very intelligent AI assitant who is expert in checking the context of the user query. The user query should match any alcohol/wine bottles related questions, keywords, pictures and logos. Make sure you understand the typos.
         If they match return "Yes".
         If they do not match the context return "No relevant images found. Enter a valid query". 
 
