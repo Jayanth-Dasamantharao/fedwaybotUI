@@ -180,7 +180,7 @@ def greetings_generator(prompt):
         
 # Main Streamlit function
 if __name__ == '__main__':
-    #st.image("fedway-logo.png", use_column_width=False, width=300)
+    st.image("fedway-logo.png", use_column_width=False, width=300)
     index_images()
     st.write_stream(greetings_generator("Greetings"))
 
