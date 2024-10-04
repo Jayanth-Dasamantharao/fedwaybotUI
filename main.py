@@ -189,7 +189,8 @@ if __name__ == '__main__':
     if "images" not in st.session_state:
         st.session_state.images = []
         
-    if st.session_state.messages:
+    # if st.session_state.messages:
+        
         
         
     # Capture user input
