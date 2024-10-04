@@ -41,8 +41,8 @@ def load_llm():
     bedrock_runtime = boto3.client(
         service_name="bedrock-runtime",
         region_name='us-east-1',
-        aws_access_key_id=os.getenviron['AWS_ACCESS_KEY'],
-        aws_secret_access_key=os.getenviron['AWS_SECRET_ACCESS_KEY']
+        aws_access_key_id=os.environ['AWS_ACCESS_KEY'],
+        aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY']
     )
     model_id = "meta.llama3-70b-instruct-v1:0"
 
