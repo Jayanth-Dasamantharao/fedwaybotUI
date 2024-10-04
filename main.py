@@ -15,7 +15,7 @@ from langchain.chains import LLMChain
 from langchain_aws import BedrockLLM
 
 # Load environment variables
-dotenv.load_dotenv()
+#dotenv.load_dotenv()
 
 # Azure Search configuration
 AZURE_SEARCH_ENDPOINT = "https://visionrag.search.windows.net"
